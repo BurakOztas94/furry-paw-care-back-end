@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -33,4 +34,7 @@ public class Animal {
     @ManyToOne
     @JoinColumn(columnDefinition = "customer_id", referencedColumnName = "id")
     private Customer customer;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "animal", cascade = CascadeType.REMOVE)
+    private List<Appointment> appointments;
 }
