@@ -26,6 +26,11 @@ public class CustomerController {
         return new ResponseEntity<> (customerService.getResponseById (id), HttpStatus.OK);
     }
 
+    @GetMapping("filter-by-name/{name}")
+    public ResponseEntity<?> filterByName(@PathVariable("name") String name) {
+        return new ResponseEntity<> (customerService.filterByName (name), HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<?> create(@Valid @RequestBody CustomerRequest customerRequest) {
         return new ResponseEntity<> (customerService.create (customerRequest), HttpStatus.CREATED);
