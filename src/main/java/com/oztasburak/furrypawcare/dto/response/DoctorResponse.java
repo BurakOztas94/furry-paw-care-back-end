@@ -25,4 +25,6 @@ public class DoctorResponse {
     private String city;
 
     private List<OnlyAvailableDateResponse> availableDates;
+
+    private List<OnlyAppointmentResponse> appointments;
 }
