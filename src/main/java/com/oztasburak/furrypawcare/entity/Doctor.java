@@ -33,4 +33,7 @@ public class Doctor {
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "doctor", cascade = CascadeType.REMOVE)
     private List<AvailableDate> availableDates;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "doctor", cascade = CascadeType.REMOVE)
+    private List<Appointment> appointments;
 }
