@@ -26,6 +26,16 @@ public class AnimalController {
         return new ResponseEntity<> (animalService.getResponseById (id), HttpStatus.OK);
     }
 
+    @GetMapping("filter-by-name/{name}")
+    public ResponseEntity<?> filterByName(@PathVariable("name") String name) {
+        return new ResponseEntity<> (animalService.filterByName (name), HttpStatus.OK);
+    }
+
+    @GetMapping("filter-by-customer-name/{customerName}")
+    public ResponseEntity<?> filterByCustomerName(@PathVariable("customerName") String customerName) {
+        return new ResponseEntity<> (animalService.filterByCustomerName (customerName), HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<?> create(@Valid @RequestBody AnimalRequest animalRequest) {
         return new ResponseEntity<> (animalService.create (animalRequest), HttpStatus.CREATED);
