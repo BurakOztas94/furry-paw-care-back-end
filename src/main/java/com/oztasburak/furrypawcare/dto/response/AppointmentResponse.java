@@ -19,4 +19,6 @@ public class AppointmentResponse {
     private OnlyDoctorResponse doctor;
 
     private OnlyAnimalResponse animal;
+
+    private OnlyReportResponse report;
 }
