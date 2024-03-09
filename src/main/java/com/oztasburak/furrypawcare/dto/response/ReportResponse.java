@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -19,4 +21,6 @@ public class ReportResponse {
     private double price;
 
     private OnlyAppointmentResponse appointment;
+
+    private List<OnlyVaccineResponse> vaccines;
 }
