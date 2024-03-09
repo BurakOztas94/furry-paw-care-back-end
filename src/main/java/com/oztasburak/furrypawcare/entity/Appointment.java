@@ -27,4 +27,7 @@ public class Appointment {
     @ManyToOne
     @JoinColumn(columnDefinition = "animal_id", referencedColumnName = "id")
     private Animal animal;
+
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "appointment", cascade = CascadeType.REMOVE)
+    private Report report;
 }
