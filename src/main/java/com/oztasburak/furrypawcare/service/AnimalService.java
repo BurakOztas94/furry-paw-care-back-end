@@ -78,4 +78,20 @@ public class AnimalService implements BaseService<Animal, AnimalRequest, AnimalR
         {
             animalRepository.delete (getById (id));
         }
+
+    public List<AnimalResponse> filterByName(String name) {
+        return animalRepository.findByName (name)
+                .stream ().map (animal -> modelMapperService
+                        .forResponse ()
+                        .map (animal, AnimalResponse.class))
+                .toList ();
+    }
+
+    public List<AnimalResponse> filterByCustomerName(String customerName) {
+        return animalRepository.findByCustomerName (customerName)
+                .stream ().map (animal -> modelMapperService
+                        .forResponse ()
+                        .map (animal, AnimalResponse.class))
+                .toList ();
+    }
 }
