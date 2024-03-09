@@ -37,4 +37,7 @@ public class Animal {
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "animal", cascade = CascadeType.REMOVE)
     private List<Appointment> appointments;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "animal", cascade = CascadeType.REMOVE)
+    private List<Vaccine> vaccines;
 }
