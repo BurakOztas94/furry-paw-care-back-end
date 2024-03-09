@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -25,4 +27,7 @@ public class Report {
     @OneToOne
     @JoinColumn(columnDefinition = "appointment_id", referencedColumnName = "id")
     private Appointment appointment;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "report", cascade = CascadeType.REMOVE)
+    private List<Vaccine> vaccines;
 }
