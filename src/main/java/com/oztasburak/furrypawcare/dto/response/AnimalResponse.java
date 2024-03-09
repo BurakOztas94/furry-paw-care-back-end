@@ -30,4 +30,6 @@ public class AnimalResponse {
     private OnlyCustomerResponse customer;
 
     private List<OnlyAppointmentResponse> appointments;
+
+    private List<OnlyVaccineResponse> vaccines;
 }
