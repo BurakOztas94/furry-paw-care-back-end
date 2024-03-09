@@ -78,4 +78,12 @@ public class CustomerService implements BaseService<Customer, CustomerRequest, C
         {
             customerRepository.delete (getById (id));
         }
+
+    public List<CustomerResponse> filterByName(String name) {
+        return customerRepository.findByName (name)
+                .stream ().map (customer -> modelMapperService
+                        .forResponse ()
+                        .map (customer, CustomerResponse.class))
+                .toList ();
+    }
 }
