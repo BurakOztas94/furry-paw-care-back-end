@@ -104,5 +104,13 @@ public class VaccineService implements BaseService<Vaccine, VaccineRequest, Vacc
                         .map (vaccine, VaccineResponse.class))
                 .toList ();
     }
+
+    public  List<VaccineResponse> getByAnimalName(String animalName) {
+        return vaccineRepository.findByAnimalName (animalName)
+                .stream ().map (vaccine -> modelMapperService
+                        .forResponse ()
+                        .map (vaccine, VaccineResponse.class))
+                .toList ();
+    }
 }
 
