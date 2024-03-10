@@ -24,9 +24,7 @@ public class VaccineRequest {
 
     private LocalDate protectionFinishDate;
 
-    @Positive
-    private Long animalId;
+    private AnimalInDtoRequest animal;
 
-    @Positive
-    private Long reportId;
+    private ReportInDtoRequest report;
 }
