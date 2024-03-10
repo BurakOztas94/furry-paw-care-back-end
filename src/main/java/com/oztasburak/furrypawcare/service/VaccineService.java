@@ -3,6 +3,7 @@ package com.oztasburak.furrypawcare.service;
 import com.oztasburak.furrypawcare.config.BaseService;
 import com.oztasburak.furrypawcare.config.ModelMapperService;
 import com.oztasburak.furrypawcare.dto.request.VaccineRequest;
+import com.oztasburak.furrypawcare.dto.response.AnimalResponse;
 import com.oztasburak.furrypawcare.dto.response.VaccineResponse;
 import com.oztasburak.furrypawcare.entity.Vaccine;
 import com.oztasburak.furrypawcare.repository.VaccineRepository;
@@ -10,6 +11,7 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -93,6 +95,14 @@ public class VaccineService implements BaseService<Vaccine, VaccineRequest, Vacc
         if ( optionalVaccine.isPresent () ) {
             throw new RuntimeException ("Vaccine is still in effect!");
         }
+    }
+
+    public List<VaccineResponse> getAllVaccinesBetweenStartAndFinishDate(LocalDate startDate, LocalDate finishDate) {
+        return vaccineRepository.findAllVaccinesBetweenStartAndFinishDate (startDate, finishDate)
+                .stream ().map (vaccine -> modelMapperService
+                        .forResponse ()
+                        .map (vaccine, VaccineResponse.class))
+                .toList ();
     }
 }
 
