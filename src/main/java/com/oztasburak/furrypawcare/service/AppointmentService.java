@@ -4,6 +4,7 @@ import com.oztasburak.furrypawcare.config.BaseService;
 import com.oztasburak.furrypawcare.config.ModelMapperService;
 import com.oztasburak.furrypawcare.dto.request.AppointmentRequest;
 import com.oztasburak.furrypawcare.dto.response.AppointmentResponse;
+import com.oztasburak.furrypawcare.dto.response.DoctorResponse;
 import com.oztasburak.furrypawcare.entity.Appointment;
 import com.oztasburak.furrypawcare.entity.AvailableDate;
 import com.oztasburak.furrypawcare.repository.AppointmentRepository;
@@ -11,6 +12,7 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -115,4 +117,24 @@ public class AppointmentService implements BaseService<Appointment, AppointmentR
                 throw new RuntimeException ("Hour conflict is present!");
             }
         }
+
+    public List<AppointmentResponse> getByDoctorNameStartAndFinishDate(
+            String doctorName,
+            LocalDate startDate,
+            LocalDate finishDate
+    ) {
+        return appointmentRepository.findByDoctorNameStartAndFinishDate (doctorName, startDate, finishDate)
+                .stream ().map (appointment -> modelMapperService.forResponse ().map (appointment, AppointmentResponse.class))
+                .toList ();
+    }
+
+    public List<AppointmentResponse> getByAnimalNameStartAndFinishDate(
+            String animalName,
+            LocalDate startDate,
+            LocalDate finishDate
+    ) {
+        return appointmentRepository.findByAnimalNameStartAndFinishDate (animalName, startDate, finishDate)
+                .stream ().map (appointment -> modelMapperService.forResponse ().map (appointment, AppointmentResponse.class))
+                .toList ();
+    }
 }
