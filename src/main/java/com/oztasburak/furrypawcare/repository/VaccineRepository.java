@@ -16,4 +16,7 @@ public interface VaccineRepository extends JpaRepository<Vaccine, Long> {
 
     @Query(value = "SELECT * FROM vaccine WHERE protection_finish_date BETWEEN ?1 AND ?2", nativeQuery = true)
     List<Vaccine> findAllVaccinesBetweenStartAndFinishDate(LocalDate startDate, LocalDate finishDate);
+
+    @Query(value = "SELECT vaccine.* FROM vaccine INNER JOIN animal ON vaccine.animal_id = animal.id WHERE animal.name ILIKE %?1%", nativeQuery = true)
+    List<Vaccine> findByAnimalName(String animalName);
 }
