@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -56,6 +57,8 @@ public class VaccineService implements BaseService<Vaccine, VaccineRequest, Vacc
                     .forRequest ()
                     .map (vaccineRequest, Vaccine.class);
 
+            validateVaccine (vaccine);
+
             return modelMapperService
                     .forResponse ()
                     .map (vaccineRepository.save (vaccine), VaccineResponse.class);
@@ -68,6 +71,8 @@ public class VaccineService implements BaseService<Vaccine, VaccineRequest, Vacc
 
             modelMapperService.forRequest ().map (vaccineRequest, doesVaccineExist);
 
+            validateVaccine (doesVaccineExist);
+
             return modelMapperService
                     .forResponse ()
                     .map (vaccineRepository.save (doesVaccineExist), VaccineResponse.class);
@@ -78,5 +83,16 @@ public class VaccineService implements BaseService<Vaccine, VaccineRequest, Vacc
         {
             vaccineRepository.delete (getById (id));
         }
+
+    private void validateVaccine(Vaccine vaccine) {
+        Optional<Vaccine> optionalVaccine = vaccineRepository.validateVaccine (
+                vaccine.getCode(),
+                vaccine.getProtectionStartDate ()
+        );
+
+        if ( optionalVaccine.isPresent () ) {
+            throw new RuntimeException ("Vaccine is still in effect!");
+        }
+    }
 }
 
