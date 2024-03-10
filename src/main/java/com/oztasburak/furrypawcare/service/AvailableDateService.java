@@ -10,7 +10,9 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -78,4 +80,8 @@ public class AvailableDateService implements BaseService<AvailableDate, Availabl
         {
             availableDateRepository.delete (getById (id));
         }
+
+    public Optional<AvailableDate> checkIfDoctorIsAvailable(Long doctorId, LocalDate availableDate) {
+        return availableDateRepository.findByDoctorIdAndAvailableDate (doctorId, availableDate);
+    }
 }
