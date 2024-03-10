@@ -6,10 +6,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface VaccineRepository extends JpaRepository<Vaccine, Long> {
     @Query(value = "SELECT * FROM vaccine WHERE code = ?1 AND protection_finish_date > ?2", nativeQuery = true)
     Optional<Vaccine> validateVaccine(String code, LocalDate protectionStartDate);
+
+    @Query(value = "SELECT * FROM vaccine WHERE protection_finish_date BETWEEN ?1 AND ?2", nativeQuery = true)
+    List<Vaccine> findAllVaccinesBetweenStartAndFinishDate(LocalDate startDate, LocalDate finishDate);
 }
