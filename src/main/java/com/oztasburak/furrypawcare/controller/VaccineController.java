@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+
 import static com.oztasburak.furrypawcare.config.BaseURL.BASE_URL;
 
 @RestController
@@ -24,6 +26,11 @@ public class VaccineController {
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable("id") Long id) {
         return new ResponseEntity<> (vaccineService.getResponseById (id), HttpStatus.OK);
+    }
+
+    @GetMapping("start-date/{startDate}/finish-date/{finishDate}")
+    public ResponseEntity<?> getAllVaccinesBetweenStartAndFinishDate(LocalDate startDate, LocalDate finishDate) {
+        return new ResponseEntity<> (vaccineService.getAllVaccinesBetweenStartAndFinishDate (startDate, finishDate), HttpStatus.OK);
     }
 
     @PostMapping
