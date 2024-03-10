@@ -29,8 +29,16 @@ public class VaccineController {
     }
 
     @GetMapping("start-date/{startDate}/finish-date/{finishDate}")
-    public ResponseEntity<?> getAllVaccinesBetweenStartAndFinishDate(LocalDate startDate, LocalDate finishDate) {
+    public ResponseEntity<?> getAllVaccinesBetweenStartAndFinishDate(
+            @PathVariable("startDate") LocalDate startDate,
+            @PathVariable("finishDate") LocalDate finishDate
+    ) {
         return new ResponseEntity<> (vaccineService.getAllVaccinesBetweenStartAndFinishDate (startDate, finishDate), HttpStatus.OK);
+    }
+
+    @GetMapping("/filter-by-animal-name/{animalName}")
+    public ResponseEntity<?> getByAnimalName(@PathVariable("animalName") String animalName) {
+        return new ResponseEntity<> (vaccineService.getByAnimalName (animalName), HttpStatus.OK);
     }
 
     @PostMapping
