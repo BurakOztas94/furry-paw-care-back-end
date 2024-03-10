@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+
 import static com.oztasburak.furrypawcare.config.BaseURL.BASE_URL;
 
 @RestController
@@ -24,6 +26,30 @@ public class AppointmentController {
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable("id") Long id) {
         return new ResponseEntity<> (appointmentService.getResponseById (id), HttpStatus.OK);
+    }
+
+    @GetMapping("/doctor-name/{doctorName}/start-date/{startDate}/finish-date/{finishDate}")
+    public ResponseEntity<?> getByDoctorNameStartAndFinishDate(
+            @PathVariable("doctorName") String doctorName,
+            @PathVariable("startDate") LocalDate startDate,
+            @PathVariable("finishDate") LocalDate finishDate
+    ) {
+        return new ResponseEntity<> (
+                appointmentService.getByDoctorNameStartAndFinishDate (doctorName, startDate, finishDate),
+                HttpStatus.OK
+        );
+    }
+
+    @GetMapping("/animal-name/{animalName}/start-date/{startDate}/finish-date/{finishDate}")
+    public ResponseEntity<?> getByAnimalNameStartAndFinishDate(
+            @PathVariable("animalName") String animalName,
+            @PathVariable("startDate") LocalDate startDate,
+            @PathVariable("finishDate") LocalDate finishDate
+    ) {
+        return new ResponseEntity<> (
+                appointmentService.getByAnimalNameStartAndFinishDate (animalName, startDate, finishDate),
+                HttpStatus.OK
+        );
     }
 
     @PostMapping
