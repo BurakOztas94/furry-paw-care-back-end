@@ -22,6 +22,5 @@ public class ReportRequest {
     @PositiveOrZero
     private double price;
 
-    @Positive
-    private Long appointmentId;
+    private AppointmentInDtoRequest appointment;
 }
