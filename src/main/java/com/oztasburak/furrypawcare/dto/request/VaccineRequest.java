@@ -20,10 +20,8 @@ public class VaccineRequest {
     @NotBlank
     private String code;
 
-    @NotBlank
     private LocalDate protectionStartDate;
 
-    @NotBlank
     private LocalDate protectionFinishDate;
 
     @Positive

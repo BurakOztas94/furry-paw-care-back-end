@@ -29,7 +29,6 @@ public class AnimalRequest {
     @NotBlank
     private String color;
 
-    @NotBlank
     private LocalDate dateOfBirth;
 
     @Positive

@@ -14,7 +14,6 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class AvailableDateRequest {
-    @NotBlank
     private LocalDate availableDate;
 
     @Positive

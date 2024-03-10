@@ -17,7 +17,6 @@ public class AppointmentRequest {
     @Positive
     private Long id;
 
-    @NotBlank
     private LocalDateTime appointmentDate;
 
     @Positive
