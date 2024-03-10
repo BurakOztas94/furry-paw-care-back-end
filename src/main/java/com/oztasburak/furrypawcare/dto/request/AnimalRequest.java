@@ -31,6 +31,5 @@ public class AnimalRequest {
 
     private LocalDate dateOfBirth;
 
-    @Positive
-    private Long customerId;
+    private CustomerInDtoRequest customer;
 }
