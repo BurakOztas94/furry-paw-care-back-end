@@ -16,6 +16,5 @@ import java.time.LocalDate;
 public class AvailableDateRequest {
     private LocalDate availableDate;
 
-    @Positive
-    private Long doctorId;
+    private DoctorInDtoRequest doctor;
 }
