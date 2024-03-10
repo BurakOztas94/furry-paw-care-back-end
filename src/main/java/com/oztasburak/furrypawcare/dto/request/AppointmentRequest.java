@@ -14,14 +14,9 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class AppointmentRequest {
-    @Positive
-    private Long id;
-
     private LocalDateTime appointmentDate;
 
-    @Positive
-    private Long doctorId;
+    private DoctorInDtoRequest doctor;
 
-    @Positive
-    private Long animalId;
+    private AnimalInDtoRequest animal;
 }
