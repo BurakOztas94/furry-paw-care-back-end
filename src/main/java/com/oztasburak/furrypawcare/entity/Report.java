@@ -24,7 +24,7 @@ public class Report {
 
     private double price;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(columnDefinition = "appointment_id", referencedColumnName = "id")
     private Appointment appointment;
 
