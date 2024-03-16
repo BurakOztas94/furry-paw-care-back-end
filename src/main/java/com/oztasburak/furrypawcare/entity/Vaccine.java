@@ -26,11 +26,11 @@ public class Vaccine {
 
     private LocalDate protectionFinishDate;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(columnDefinition = "animal_id", referencedColumnName = "id")
     private Animal animal;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(columnDefinition = "report_id", referencedColumnName = "id")
     private Report report;
 }
