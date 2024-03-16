@@ -31,7 +31,7 @@ public class Animal {
 
     private LocalDate dateOfBirth;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(columnDefinition = "customer_id", referencedColumnName = "id")
     private Customer customer;
 
