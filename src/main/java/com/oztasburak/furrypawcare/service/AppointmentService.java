@@ -73,8 +73,13 @@ public class AppointmentService implements BaseService<Appointment, AppointmentR
     public AppointmentResponse update (Long id , AppointmentRequest appointmentRequest)
         {
             Appointment doesAppointmentExist = getById (id);
+            Appointment appointment = modelMapperService
+                    .forRequest ()
+                    .map (appointmentRequest, Appointment.class);
 
-            modelMapperService.forRequest ().map (appointmentRequest, doesAppointmentExist);
+            modelMapperService
+                    .forRequest ()
+                    .map (appointment, doesAppointmentExist);
 
             validateAppointment (doesAppointmentExist);
 
