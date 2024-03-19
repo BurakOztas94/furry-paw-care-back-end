@@ -80,7 +80,7 @@ public class AppointmentService implements BaseService<Appointment, AppointmentR
             modelMapperService
                     .forRequest ()
                     .map (appointment, doesAppointmentExist);
-
+                    doesAppointmentExist.setId (id);
             validateAppointment (doesAppointmentExist);
 
             return modelMapperService
