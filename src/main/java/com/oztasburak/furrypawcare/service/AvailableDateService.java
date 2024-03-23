@@ -4,6 +4,8 @@ import com.oztasburak.furrypawcare.config.BaseService;
 import com.oztasburak.furrypawcare.config.ModelMapperService;
 import com.oztasburak.furrypawcare.dto.request.AvailableDateRequest;
 import com.oztasburak.furrypawcare.dto.response.AvailableDateResponse;
+import com.oztasburak.furrypawcare.dto.response.AvailableDateResponse;
+import com.oztasburak.furrypawcare.entity.AvailableDate;
 import com.oztasburak.furrypawcare.entity.AvailableDate;
 import com.oztasburak.furrypawcare.repository.AvailableDateRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -67,8 +69,14 @@ public class AvailableDateService implements BaseService<AvailableDate, Availabl
     public AvailableDateResponse update (Long id , AvailableDateRequest availableDateRequest)
         {
             AvailableDate doesAvailableDateExist = getById (id);
+            AvailableDate availableDate = modelMapperService
+                    .forRequest ()
+                    .map (availableDateRequest, AvailableDate.class);
 
-            modelMapperService.forRequest ().map (availableDateRequest, doesAvailableDateExist);
+            modelMapperService
+                    .forRequest ()
+                    .map (availableDate, doesAvailableDateExist);
+            doesAvailableDateExist.setId (id);
 
             return modelMapperService
                     .forResponse ()

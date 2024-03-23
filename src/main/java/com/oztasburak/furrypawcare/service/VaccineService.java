@@ -3,8 +3,9 @@ package com.oztasburak.furrypawcare.service;
 import com.oztasburak.furrypawcare.config.BaseService;
 import com.oztasburak.furrypawcare.config.ModelMapperService;
 import com.oztasburak.furrypawcare.dto.request.VaccineRequest;
-import com.oztasburak.furrypawcare.dto.response.AnimalResponse;
 import com.oztasburak.furrypawcare.dto.response.VaccineResponse;
+import com.oztasburak.furrypawcare.dto.response.VaccineResponse;
+import com.oztasburak.furrypawcare.entity.Vaccine;
 import com.oztasburak.furrypawcare.entity.Vaccine;
 import com.oztasburak.furrypawcare.repository.VaccineRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -70,10 +71,14 @@ public class VaccineService implements BaseService<Vaccine, VaccineRequest, Vacc
     public VaccineResponse update (Long id , VaccineRequest vaccineRequest)
         {
             Vaccine doesVaccineExist = getById (id);
+            Vaccine vaccine = modelMapperService
+                    .forRequest ()
+                    .map (vaccineRequest, Vaccine.class);
 
-            modelMapperService.forRequest ().map (vaccineRequest, doesVaccineExist);
-
-            validateVaccine (doesVaccineExist);
+            modelMapperService
+                    .forRequest ()
+                    .map (vaccine, doesVaccineExist);
+            doesVaccineExist.setId (id);
 
             return modelMapperService
                     .forResponse ()
@@ -105,8 +110,8 @@ public class VaccineService implements BaseService<Vaccine, VaccineRequest, Vacc
                 .toList ();
     }
 
-    public  List<VaccineResponse> getByAnimalName(String animalName) {
-        return vaccineRepository.findByAnimalName (animalName)
+    public  List<VaccineResponse> getByAnimalName(String vaccineName) {
+        return vaccineRepository.findByAnimalName (vaccineName)
                 .stream ().map (vaccine -> modelMapperService
                         .forResponse ()
                         .map (vaccine, VaccineResponse.class))

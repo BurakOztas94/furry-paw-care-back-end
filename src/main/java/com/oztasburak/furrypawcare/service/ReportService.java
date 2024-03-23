@@ -4,6 +4,8 @@ import com.oztasburak.furrypawcare.config.BaseService;
 import com.oztasburak.furrypawcare.config.ModelMapperService;
 import com.oztasburak.furrypawcare.dto.request.ReportRequest;
 import com.oztasburak.furrypawcare.dto.response.ReportResponse;
+import com.oztasburak.furrypawcare.dto.response.ReportResponse;
+import com.oztasburak.furrypawcare.entity.Report;
 import com.oztasburak.furrypawcare.entity.Report;
 import com.oztasburak.furrypawcare.repository.ReportRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -65,8 +67,14 @@ public class ReportService implements BaseService<Report, ReportRequest, ReportR
     public ReportResponse update (Long id , ReportRequest reportRequest)
         {
             Report doesReportExist = getById (id);
+            Report report = modelMapperService
+                    .forRequest ()
+                    .map (reportRequest, Report.class);
 
-            modelMapperService.forRequest ().map (reportRequest, doesReportExist);
+            modelMapperService
+                    .forRequest ()
+                    .map (report, doesReportExist);
+            doesReportExist.setId (id);
 
             return modelMapperService
                     .forResponse ()

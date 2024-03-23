@@ -26,12 +26,12 @@ public class AnimalController {
         return new ResponseEntity<> (animalService.getResponseById (id), HttpStatus.OK);
     }
 
-    @GetMapping("filter-by-name/{name}")
+    @GetMapping("/filter-by-name/{name}")
     public ResponseEntity<?> filterByName(@PathVariable("name") String name) {
         return new ResponseEntity<> (animalService.filterByName (name), HttpStatus.OK);
     }
 
-    @GetMapping("filter-by-customer-name/{customerName}")
+    @GetMapping("/filter-by-customer-name/{customerName}")
     public ResponseEntity<?> filterByCustomerName(@PathVariable("customerName") String customerName) {
         return new ResponseEntity<> (animalService.filterByCustomerName (customerName), HttpStatus.OK);
     }

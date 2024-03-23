@@ -80,7 +80,7 @@ public class CustomerService implements BaseService<Customer, CustomerRequest, C
         }
 
     public List<CustomerResponse> filterByName(String name) {
-        return customerRepository.findByName (name)
+        return customerRepository.findByNameIgnoringCaseContaining (name)
                 .stream ().map (customer -> modelMapperService
                         .forResponse ()
                         .map (customer, CustomerResponse.class))

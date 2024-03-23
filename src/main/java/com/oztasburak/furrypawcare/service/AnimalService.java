@@ -65,8 +65,14 @@ public class AnimalService implements BaseService<Animal, AnimalRequest, AnimalR
     public AnimalResponse update (Long id , AnimalRequest animalRequest)
         {
             Animal doesAnimalExist = getById (id);
+            Animal animal = modelMapperService
+                    .forRequest ()
+                    .map (animalRequest, Animal.class);
 
-            modelMapperService.forRequest ().map (animalRequest, doesAnimalExist);
+            modelMapperService
+                    .forRequest ()
+                    .map (animal, doesAnimalExist);
+            doesAnimalExist.setId (id);
 
             return modelMapperService
                     .forResponse ()
@@ -80,7 +86,7 @@ public class AnimalService implements BaseService<Animal, AnimalRequest, AnimalR
         }
 
     public List<AnimalResponse> filterByName(String name) {
-        return animalRepository.findByName (name)
+        return animalRepository.findByNameIgnoringCaseContaining (name)
                 .stream ().map (animal -> modelMapperService
                         .forResponse ()
                         .map (animal, AnimalResponse.class))
